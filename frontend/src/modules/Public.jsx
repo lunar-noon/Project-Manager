@@ -43,12 +43,14 @@ export default function Public() {
       <button onClick={buttonClicked}>Button 3</button>
       <hr />
       <p>New Item: </p>
-      <input type='text' value={item}
-        onChange={(event) => setItem(event.target.value)}
-        />
-      <button onClick={postItem}>Add Item</button>
-
-      <ul>
+      <form onSubmit={postItem}>
+        <input type='text' value={item}
+          onChange={(event) => setItem(event.target.value)}
+          />
+        <button type='submit'>Add Item</button>
+      </form>
+      
+      <ul style={{ maxHeight: '40vh', overflowY: 'scroll' }}>
         {liste.map((item, index) => {
           return <li key={index}>{item}</li>
         })}

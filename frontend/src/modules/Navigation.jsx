@@ -1,4 +1,5 @@
 import "../styles/Navigation.css"
+import AuthService from "../services/auth.service"
 
 export default function Navigation() {
   return (
@@ -13,6 +14,20 @@ export default function Navigation() {
         <li>
           <a href="/public">Public</a>
         </li>
+        {AuthService.getCurrentUser() ? (
+          <>
+            <li>
+              <a href="/private">Private</a>
+            </li>
+            <li>
+              <a href="/login" onClick={AuthService.logout}>Logout</a>
+            </li>
+          </>
+        ) : (
+          <li>
+            <a href="/login">Login</a>
+          </li>
+        )}
       </ul>
     </nav>
   )
