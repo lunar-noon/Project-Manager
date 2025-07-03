@@ -61,7 +61,7 @@ public class SecurityConfiguration {
     .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
     .authorizeHttpRequests(auth ->
       auth.requestMatchers(EVERYONE).permitAll()
-      .requestMatchers("/projects/**", "/tasks", "/project-members").authenticated()
+      .requestMatchers("/projects/**", "/tasks/**").authenticated()
       .anyRequest().authenticated()
     );
     http.authenticationProvider(authenticationProvider());

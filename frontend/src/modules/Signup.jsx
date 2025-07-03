@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../services/auth.service';
 import { useState } from 'react';
+import '../styles/Signup.css'
 
 export default function Signup() {
   const redirect = useNavigate();
@@ -8,6 +9,7 @@ export default function Signup() {
     username: "",
     email: "",
     password: "",
+    passwordConfirm: "",
     roles: [],
   });
 
@@ -30,6 +32,11 @@ export default function Signup() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (entries.password !== entries.passwordConfirm) {
+      alert("Passwords do not match.");
+      return;
+    }
 
     if (entries.roles.length === 0) {
       alert("Please select at least one role.");
@@ -73,6 +80,14 @@ export default function Signup() {
           <label htmlFor="password">Password:</label>
           <input type="password" id="password"
             name="password" value={entries.password}
+            onChange={store} required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="passwordConfirm">Confirm <br /> Password:</label>
+          <input type="password" id="passwordConfirm"
+            name="passwordConfirm" value={entries.passwordConfirm}
             onChange={store} required
           />
         </div>
