@@ -17,6 +17,9 @@ export default function Navigation() {
         {AuthService.getCurrentUser() ? (
           <>
             <li>
+              <a href="/projects">Projects</a>
+            </li>
+            <li>
               <a href="/private">Private</a>
             </li>
             <li>

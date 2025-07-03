@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthService from '../services/auth.service';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function Login() {
   const redirect = useNavigate();
@@ -47,6 +47,7 @@ export default function Login() {
           />
         </div>
         <button type="submit">Login</button>
+        <Link to="/signup">Sign up</Link>
       </form>
     </div>
   );
