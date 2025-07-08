@@ -32,7 +32,7 @@ jobs:
       run: mvn -f backend/ --batch-mode -Dmaven.test.failure.ignore=true test
 
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B package --file backend/pom.xml
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
