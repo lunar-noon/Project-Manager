@@ -11,24 +11,43 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Repräsentiert eine Rolle, die einem Benutzer zugewiesen werden kann.
+ */
 @Entity
 @Getter @Setter @NoArgsConstructor
 public class Role {
+
+  /**
+   * Die eindeutige ID der Rolle.
+   */
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
+  /**
+   * Der Name der Rolle (als Enum).
+   */
   @Enumerated(EnumType.STRING)
   @Column(length = 20)
   private ERole name;
 
+  /**
+   * Konstruktor mit Rollenname.
+   *
+   * @param name Der Rollenname.
+   */
   public Role(ERole name) {
     this.name = name;
   }
-  
+
+  /**
+   * Gibt den Namen der Rolle als String zurück.
+   *
+   * @return Der Rollenname.
+   */
   @Override
-  public String toString(){
+  public String toString() {
     return name.toString();
   }
-  
 }

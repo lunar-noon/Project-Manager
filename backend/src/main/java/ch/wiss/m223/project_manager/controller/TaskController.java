@@ -6,12 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import ch.wiss.m223.project_manager.dto.TaskCreateDTO;
 import ch.wiss.m223.project_manager.dto.TaskDTO;
@@ -22,10 +17,14 @@ import ch.wiss.m223.project_manager.service.ProjectService;
 import ch.wiss.m223.project_manager.service.TaskService;
 import ch.wiss.m223.project_manager.service.UserService;
 
+/**
+ * REST-Controller zur Verwaltung von Aufgaben.
+ */
 @RestController
 @RequestMapping("/tasks")
 @CrossOrigin
 public class TaskController {
+
   @Autowired
   private TaskService taskService;
 
@@ -35,6 +34,11 @@ public class TaskController {
   @Autowired
   private ProjectService projectService;
 
+  /**
+   * Gibt eine Liste aller Aufgaben zurück.
+   *
+   * @return Eine Liste von {@link TaskDTO}s.
+   */
   @GetMapping
   public List<TaskDTO> getAllTasks() {
     return taskService.findAll().stream()
@@ -42,19 +46,22 @@ public class TaskController {
         .collect(Collectors.toList());
   }
 
+  /**
+   * Erstellt eine neue Aufgabe basierend auf einem {@link TaskCreateDTO}.
+   *
+   * @param dto Die DTO-Daten für die neue Aufgabe.
+   * @return Response mit der erstellten Aufgabe oder einer Fehlermeldung.
+   */
   @PostMapping
   public ResponseEntity<?> createTask(@RequestBody TaskCreateDTO dto) {
-    // Nutzer und Projekt aus DTO-IDs holen
     Optional<User> assignedUserOpt = userService.findById(dto.getAssignedUserId());
     Optional<User> createdByOpt = userService.findById(dto.getCreatedById());
     Optional<Project> projectOpt = projectService.findById(dto.getProjectId());
 
-    // Validierung
     if (assignedUserOpt.isEmpty() || createdByOpt.isEmpty() || projectOpt.isEmpty()) {
       return ResponseEntity.badRequest().body("Benutzer oder Projekt nicht gefunden");
     }
 
-    // Entity aus DTO erstellen
     Task task = dto.toEntity(
         assignedUserOpt.get(),
         createdByOpt.get(),

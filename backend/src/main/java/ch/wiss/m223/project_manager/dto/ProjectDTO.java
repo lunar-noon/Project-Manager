@@ -4,14 +4,23 @@ import ch.wiss.m223.project_manager.model.Project;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
-@Getter
+/**
+ * Datenübertragungsobjekt für ein Projekt.
+ */
+@Setter @Getter
 public class ProjectDTO {
+
   private Long id;
   private String name;
   private String description;
   private UserDTO owner;
 
+  /**
+   * Wandelt ein {@link Project} Entity in ein {@link ProjectDTO} um.
+   *
+   * @param project Das Projekt-Objekt.
+   * @return Ein neues {@link ProjectDTO} oder {@code null}, falls das Projekt null ist.
+   */
   public static ProjectDTO fromEntity(Project project) {
     if (project == null)
       return null;

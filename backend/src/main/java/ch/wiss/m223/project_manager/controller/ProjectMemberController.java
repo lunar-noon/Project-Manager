@@ -2,12 +2,7 @@ package ch.wiss.m223.project_manager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import ch.wiss.m223.project_manager.model.Project;
 import ch.wiss.m223.project_manager.model.ProjectMember;
@@ -16,17 +11,30 @@ import ch.wiss.m223.project_manager.service.ProjectMemberService;
 import ch.wiss.m223.project_manager.service.ProjectService;
 import ch.wiss.m223.project_manager.service.UserService;
 
+/**
+ * REST-Controller zur Verwaltung von Projektmitgliedschaften.
+ */
 @RestController
 @RequestMapping("/project-members")
 @CrossOrigin
 public class ProjectMemberController {
+
   @Autowired
   private ProjectMemberService memberService;
+
   @Autowired
   private ProjectService projectService;
+
   @Autowired
   private UserService userService;
 
+  /**
+   * Fügt einem Projekt ein Mitglied hinzu.
+   *
+   * @param projectId Die ID des Projekts.
+   * @param userId    Die ID des Benutzers.
+   * @return Response mit Erfolg oder Fehlermeldung.
+   */
   @PostMapping
   public ResponseEntity<?> addMember(@RequestParam Long projectId, @RequestParam Long userId) {
     Project project = projectService.findById(projectId).orElse(null);
@@ -46,6 +54,13 @@ public class ProjectMemberController {
     return ResponseEntity.ok("Mitglied hinzugefügt");
   }
 
+  /**
+   * Entfernt ein Mitglied aus einem Projekt.
+   *
+   * @param projectId Die ID des Projekts.
+   * @param userId    Die ID des Benutzers.
+   * @return Response mit Erfolg oder Fehlermeldung.
+   */
   @DeleteMapping
   public ResponseEntity<?> removeMember(@RequestParam Long projectId, @RequestParam Long userId) {
     Project project = projectService.findById(projectId).orElse(null);
