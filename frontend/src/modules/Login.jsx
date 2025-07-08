@@ -1,6 +1,7 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthService from '../services/auth.service';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import '../styles/Login.css'
 
 export default function Login() {
   const redirect = useNavigate();
@@ -17,11 +18,12 @@ export default function Login() {
       AuthService.login(entries.username.trim(), entries.password.trim())
         .then((res) => {
           if (res.username) {
-            redirect(0); // that actually does the redirect correctly
+            redirect("/projects");
+            window.location.reload();
           }
         })
         .catch((err) => {
-          if (err.status === 401) {
+          if (err.status === 401 || err.status === 400) {
             alert("Wrong username or password");
           }
         });
@@ -47,6 +49,7 @@ export default function Login() {
           />
         </div>
         <button type="submit">Login</button>
+        <Link to="/signup"><button>Sign up</button></Link>
       </form>
     </div>
   );

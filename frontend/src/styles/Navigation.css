@@ -1,5 +1,6 @@
 nav ul {
   display: flex;
+  padding-left: 0px;
 
   & > li {
     list-style: none;

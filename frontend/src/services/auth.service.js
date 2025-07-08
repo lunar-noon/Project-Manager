@@ -25,6 +25,25 @@ resolve with an error object, which is
 unexpected behavior for most consumers.
 */
 
+const signup = (username, email, password, roles = ["user"]) => {
+  return axios
+    .post(API_URL + "signup", {
+      username,
+      email,
+      password,
+      roles,
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      throw error;
+    });
+};
+
+
+
 const logout = () => {
   localStorage.removeItem("user");
 };
@@ -34,12 +53,15 @@ const getCurrentUser = () => {
 };
 
 const getJwtHeader = () => {
-  let tok = JSON.parse(localStorage.getItem("user")).token
-  return tok ? { headers: { Authorization: `Bearer ${tok}` } } : undefined
-}
+  const user = JSON.parse(localStorage.getItem("user"));
+  return user?.token
+    ? { headers: { Authorization: `Bearer ${user.token}` } }
+    : { headers: {} };
+};
 
 const AuthService = {
   login,
+  signup,
   logout,
   getJwtHeader,
   getCurrentUser,
