@@ -1,5 +1,6 @@
 package ch.wiss.m223.project_manager.dto;
 
+import ch.wiss.m223.project_manager.model.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,4 +11,12 @@ public class UserDTO {
   private String email;
   private String role;
   
+  public static UserDTO fromEntity(User user) {
+    if (user == null) return null;
+    UserDTO dto = new UserDTO();
+    dto.setId(user.getId());
+    dto.setUsername(user.getUsername());
+    dto.setEmail(user.getEmail());
+    return dto;
+  }
 }

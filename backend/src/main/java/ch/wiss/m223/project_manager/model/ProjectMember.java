@@ -24,4 +24,9 @@ public class ProjectMember {
   @ManyToOne
   @JoinColumn(name = "project_id")
   private Project project;
+
+  public ProjectMember(User user, Project project) {
+    this.user = user;
+    this.project = project;
+  }
 }
