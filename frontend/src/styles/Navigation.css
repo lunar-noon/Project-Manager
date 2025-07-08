@@ -1,0 +1,16 @@
+nav ul {
+  display: flex;
+  padding-left: 0px;
+
+  & > li {
+    list-style: none;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 2px;
+    & > a {
+      font-size: 1.3em;
+      font-weight: bold;
+      padding: 15px 20px;
+    }
+  }
+}
