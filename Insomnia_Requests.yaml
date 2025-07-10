@@ -1,0 +1,293 @@
+type: collection.insomnia.rest/5.0
+name: Scratch Pad
+meta:
+  id: wrk_scratchpad
+  created: 1727763684683
+  modified: 1727763684683
+collection:
+  - name: Messages
+    meta:
+      id: fld_228fdceda86b44df9f03b78335baa167
+      created: 1730815300847
+      modified: 1730815350208
+      sortKey: -1727774861246.666
+  - name: User
+    meta:
+      id: fld_725d77a7705d4d96835c5456b17bd2af
+      created: 1730815300862
+      modified: 1730815329709
+      sortKey: -1727774861346.666
+  - name: M223
+    meta:
+      id: fld_ccb95e14d2b5464d98b37020dd2f04e2
+      created: 1748338638730
+      modified: 1752060873690
+      sortKey: -1748338638730
+    children:
+      - name: old
+        meta:
+          id: fld_f7372e5eb3634db384187096dd9fc1c5
+          created: 1751996355618
+          modified: 1751996382608
+          sortKey: -1748338649230
+      - url: localhost:8080/api/auth/login
+        name: Login
+        meta:
+          id: req_94db69c36e3047029590bec12642253c
+          created: 1748327210376
+          modified: 1751997795658
+          isPrivate: false
+          sortKey: -1748338648930
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"username": "user",
+            	"password": "password"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: none
+        scripts:
+          afterResponse: |-
+            const jsonBody = insomnia.response.json();
+             
+            const token = jsonBody.token;
+             
+            insomnia.environment.set("jwt", token);
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/api/auth/signup
+        name: Signup
+        meta:
+          id: req_266f79779ac541faa998cec3e10e2b93
+          created: 1748338511198
+          modified: 1752060688203
+          isPrivate: false
+          sortKey: -1748338648830
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"username": "user",
+            	"email": "user@test.ch",
+            	"password": "password",
+            	"roles": ["user", "admin"]
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: none
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/projects
+        name: Projekt
+        meta:
+          id: req_87aa6a0de96b45f28e7dae48d0fdf4b2
+          created: 1750919143512
+          modified: 1750931591186
+          isPrivate: false
+          sortKey: -1748338648980
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/projects
+        name: Projekt Post
+        meta:
+          id: req_3e2d207523224eaca12ed93ca19b077a
+          created: 1750919154205
+          modified: 1752006589287
+          isPrivate: false
+          sortKey: -1748338648955
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "name": "Projekt 1",
+              "description": "text",
+              "ownerId": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/tasks
+        name: Task
+        meta:
+          id: req_f18b7ade7c2d4cbdb49c5a25f974a396
+          created: 1751995954973
+          modified: 1751996475011
+          isPrivate: false
+          sortKey: -1748338648967.5
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/tasks
+        name: Task Post
+        meta:
+          id: req_d56d049f1de3444baa70fd8fee7fadc6
+          created: 1751995984671
+          modified: 1752060734864
+          isPrivate: false
+          sortKey: -1748338648942.5
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "title": "Task 1",
+              "description": "Erledigen!",
+              "status": "OPEN",
+              "assignedUserId": 2,
+              "createdById": 1,
+              "projectId": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/project-members
+        name: Projekt-Mitglied Post
+        meta:
+          id: req_6aa433bf671d4abe8d85a29fb2161574
+          created: 1751996200773
+          modified: 1752006681690
+          isPrivate: false
+          sortKey: -1748338648936.25
+        method: POST
+        parameters:
+          - id: pair_224dce9d1d9743e6be74c1b3b789d784
+            name: projectId
+            value: "1"
+            disabled: false
+          - id: pair_5e7907a4d647492f9a9c28899c10935a
+            name: userId
+            value: "2"
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/project-members
+        name: Projekt-Mitglied Delete
+        meta:
+          id: req_83b6742a8664483abf09e4c6e4e104cc
+          created: 1751996343926
+          modified: 1752006687254
+          isPrivate: false
+          sortKey: -1748338648933.125
+        method: DELETE
+        parameters:
+          - id: pair_224dce9d1d9743e6be74c1b3b789d784
+            name: projectId
+            value: "1"
+            disabled: false
+          - id: pair_5e7907a4d647492f9a9c28899c10935a
+            name: userId
+            value: "2"
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    authentication:
+      type: bearer
+      token: "{{jwt}}"
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1747906345374
+    modified: 1752060873687
+  cookies:
+    - id: 9c6f4dcd-efcc-4ecb-bd3b-c3eafb00482b
+      key: JSESSIONID
+      value: CE8576F25C84FD4DD605E873ABA6CF61
+      domain: localhost
+      path: /
+      secure: false
+      httpOnly: true
+      creation: 2025-05-27T06:27:52.055Z
+      hostOnly: true
+      lastAccessed: 2025-05-27T11:10:56.354Z
+environments:
+  name: Base Environment
+  meta:
+    id: env_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1747906345252
+    modified: 1752060873688
+    isPrivate: false
+  data:
+    jwt: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNzUyMDYwODczLCJleHAiOjE3NTIwNzA4NzN9.K1CxyREIqMuJpdWzp6tEkHV2GhtIlqxgzFyCcC-AZA1cbvbUXYvvKhGEl5yvFw1F
